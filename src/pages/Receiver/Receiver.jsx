@@ -12,7 +12,7 @@ const Receiver = () => {
  const handleSubmit = async (e) => {
   e.preventDefault()
   setLoading(true)
-  const response = await axios.get("http://localhost:5000/get/" + optimaIdentifier)
+  const response = await axios.get("hhttps://optima-backend-tha0.onrender.com/get/" + optimaIdentifier)
   console.log(response.data)
   setResult(response.data)
   setLoading(false)

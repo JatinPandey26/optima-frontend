@@ -1,8 +1,8 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import HashLoader from "react-spinners/HashLoader"
-import "./Sender.css"
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import HashLoader from "react-spinners/HashLoader";
+import "./Sender.css";
 
 const Sender = () => {
 
@@ -13,23 +13,23 @@ const Sender = () => {
  const [loading, setLoading] = useState(false)
  const [copied, setCopied] = useState(false)
 
-useEffect(() => {
+ useEffect(() => {
 
- const updateFields = () => {
-  const newData = [
+  const updateFields = () => {
+   const newData = [
     { type: 'text', fieldName: "Name", fieldValue: 'John Doe', saveToWeb3: true },
     { type: 'number', fieldName: "Age", fieldValue: 25, saveToWeb3: false },
     { type: 'text', fieldName: "Email", fieldValue: 'john.doe@example.com', saveToWeb3: true },
     { type: 'boolean', fieldName: "Active", fieldValue: true, saveToWeb3: false },
     { type: 'date', fieldName: "Birthdate", fieldValue: '1999-01-01', saveToWeb3: true }
-  ];
+   ];
 
-  setFields(newData);
-};
+   setFields(newData);
+  };
 
 
- updateFields()
-},[])
+  updateFields()
+ }, [])
 
 
  const handleSenderFormSubmit = async (event) => {
@@ -50,19 +50,26 @@ useEffect(() => {
   console.log('Sender form submitted')
   console.log(fields)
   setLoading(true)
-  const response = await axios.post("http://localhost:5000/save", { fields })
-  console.log(response.data)
-  setResult(response.data)
-  setLoading(false)
+  try {
+   // const response = await axios.post("http://localhost:5000/save", { fields })
+   const response = await axios.post("https://optima-backend-tha0.onrender.com/save", { fields })
+   console.log(response.data)
+   setResult(response.data)
+
+  } catch (error) {
+   console.log(error)
+  } finally {
+   setLoading(false)
+  }
  }
 
 
  const handleCopy = () => {
   setCopied(true);
   setTimeout(() => {
-    setCopied(false);
+   setCopied(false);
   }, 2000);
-};
+ };
 
  const handleChange = (index, event) => {
   const { name, value } = event.target;
@@ -97,7 +104,7 @@ useEffect(() => {
      <input onChange={e => setUseOptima(e.target.checked)} type="checkbox" />
     </label>
    </div>
- 
+
    <form onSubmit={handleSenderFormSubmit}>
     {
      fields.map((field, index) =>
@@ -169,10 +176,10 @@ useEffect(() => {
     <h3>Result</h3>
     <p>Transaction time: {result.timeTaken} ms</p>
     <p>Transaction Fee (Gas Fee) : ₹ {result.gasFee}</p>
-    <p>Optima Identifier : {result.optimaIdentifier} 
-    <CopyToClipboard text={result.optimaIdentifier} onCopy={handleCopy}>
-        <button className='copyBtn' type='button'>{copied ? 'Copied!' : 'Copy'}</button>
-      </CopyToClipboard>
+    <p>Optima Identifier : {result.optimaIdentifier}
+     <CopyToClipboard text={result.optimaIdentifier} onCopy={handleCopy}>
+      <button className='copyBtn' type='button'>{copied ? 'Copied!' : 'Copy'}</button>
+     </CopyToClipboard>
     </p>
    </div>}
 
