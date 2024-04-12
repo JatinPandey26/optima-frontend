@@ -13,23 +13,23 @@ const Sender = () => {
  const [loading, setLoading] = useState(false)
  const [copied, setCopied] = useState(false)
 
- useEffect(() => {
+ // useEffect(() => {
 
-  const updateFields = () => {
-   const newData = [
-    { type: 'text', fieldName: "Name", fieldValue: 'John Doe', saveToWeb3: true },
-    { type: 'number', fieldName: "Age", fieldValue: 25, saveToWeb3: false },
-    { type: 'text', fieldName: "Email", fieldValue: 'john.doe@example.com', saveToWeb3: true },
-    { type: 'boolean', fieldName: "Active", fieldValue: true, saveToWeb3: false },
-    { type: 'date', fieldName: "Birthdate", fieldValue: '1999-01-01', saveToWeb3: true }
-   ];
+ //  const updateFields = () => {
+ //   const newData = [
+ //    { type: 'text', fieldName: "Name", fieldValue: 'John Doe', saveToWeb3: true },
+ //    { type: 'number', fieldName: "Age", fieldValue: 25, saveToWeb3: false },
+ //    { type: 'text', fieldName: "Email", fieldValue: 'john.doe@example.com', saveToWeb3: true },
+ //    { type: 'boolean', fieldName: "Active", fieldValue: true, saveToWeb3: false },
+ //    { type: 'date', fieldName: "Birthdate", fieldValue: '1999-01-01', saveToWeb3: true }
+ //   ];
 
-   setFields(newData);
-  };
+ //   setFields(newData);
+ //  };
 
 
-  updateFields()
- }, [])
+ //  updateFields()
+ // }, [])
 
 
  const handleSenderFormSubmit = async (event) => {
@@ -119,6 +119,7 @@ const Sender = () => {
         <option value="text">Text</option>
         <option value="number">Number</option>
         <option value="date">Date</option>
+        <option value="boolean">Boolean</option>
         {/* Add more options as needed */}
        </select>
 
